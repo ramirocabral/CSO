@@ -1,0 +1,160 @@
+\documentclass[11pt]{article}
+\usepackage{enumerate}
+%! TEX root = "~/home/ramiro/Desktop/CSO/practicas/practica1/main.tex"
+
+\title{\Huge{Conceptos de Sistemas Operativos\\
+Practica 1}}
+\author{\huge{Ramiro Cabral}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\pagebreak
+\section{Caracteristicas de GNU/Linux}
+
+\subsection{Caracteristicas mas relevantes}
+\begin{itemize}
+    \item Es un sistema operativo UNIX-Like
+    \item Es multiusuario
+    \item Es multitarea
+    \item Es altamente portable
+    \item Es case-sensitive
+    \item Es de codigo abierto
+    \item Todo es un archivo(incluso los dispositivos y directorios)
+\end{itemize}
+
+\subsection{Otros sistemas operativos}
+\begin{itemize}
+    \item Microsoft Windows
+    \item MacOS
+    \item FreeBSD
+\end{itemize}
+
+\subsection{Que es GNU?}
+Es un una gran coleccion de programas de codigo abierto y de acceso libre.
+
+\subsection{Que es la multitarea?}
+Es la caracteristica de los sistemas operativos modernos que permite que varias procesos o aplicaciones se ejecuten aparentemente al mismo tiempo, compartiendo uno o mas procesadores. GNU/Linux usa la multitarea preventiva, la cual asegura que todos los programas que se esten utilizando en un momento dado seran ejecutados.
+
+\subsection{Que es POSIX?}
+Posix (Portable Operating System Interface for Unix) es un conjunto o familia de estandares que buscan definir formas para que los programas interactuen con un sistema operativo, facilitando su interoperabilidad.
+\section{Distrubuciones de GNU/Linux}
+\subsection{Algunas distribuciones}
+\begin{itemize}
+    \item Red Hat
+    \item Debian
+    \item Arch Linux
+    \item SlackWare.
+\end{itemize}
+
+\section{Estructura de GNU/Linux}
+\subsection{3 componentes fundamentales de GNU/Linux}
+\begin{itemize}
+    \item Kernel(nucleo)
+    \item Shell (interprete de comandos)
+    \item FileSystem (sistema de archivos)
+\end{itemize}
+
+\subsection{Estructura basica de GNU/Linux}
+\begin{itemize}
+    \item Paquete de software basico.
+    \item Editores de texto.
+    \item Herramientas de Networking
+    \item Interfaces graficas.
+\end{itemize}
+
+\section{Kernel de GNU/Linux}
+\subsection{Que es el Kernel y cuales son sus funcines principales?}
+Es el encargado de que el software y el hardware puedan trabajar juntos.
+Sus funciones principales son:
+\begin{itemize}
+    \item Administracion de memoria.
+    \item Administracion de la CPU.
+    \item Administracion de la E/S.
+\end{itemize}
+
+\subsection{Arquitectura del Kernel}
+El kernel es un nucleo monolitico hibrido:
+\begin{itemize}
+    \item Los drivers y el codigo del mismo se ejecutan en modo privilegiado.
+    \item Lo que lo hace hibrido es la capacidad de cargar y descargar funcionalidad a traves de modulos.
+\end{itemize}
+
+\section{Shell (Interprete de comandos)}
+\subsection{Que es?}
+Es el modo de comunicacion que el usuario posee con el sistema operativo. El mismo ejecuta programas mediante el ingreso de comandos.
+
+\subsection{Ejemplos:}
+\begin{itemize}
+    \item Zsh (Este es el bueno)
+    \item Bash
+    \item Fish
+\end{itemize}
+
+\subsection{Que son los \textit{path} y donde se encuentran?}
+En un sistema GNU/Linux, los denominados \textit{path} son directorios especificados por una variable de entorno del sistema, en estos directorios se encuentran los ejecutables de los programas ejecutados por los shell.
+Cuando el usuario instala un paquete, sus archivos binarios se ubican generalmente en el directorio /usr/bin. Los programas incluidos en el paquete de software de la distribucion se ubican en el directorio /bin.
+
+\section{File System (sistema de archivos)}
+\subsection{Que es el Fyle System?}
+Es un sistema que controla como se almacenan y recuperan los datos en un medio de almacenamiento.
+
+\subsection{Sistemas de archivos soportados por GNU/Linux}
+\begin{itemize}
+    \item ext4
+    \item xfs
+    \item fat32
+    \item exFat
+\end{itemize}
+
+\subsection{Jerarquia de directorios en GNU/Linux}
+\begin{itemize}
+    \item \textbf{/} : Tope de la estructura de directorios.
+    \item \textbf{/home} : Se almacenan los archivos de los usuarios.
+    \item \textbf{/var} : Informacion que varia de tamanio en el tiempo.
+    \item \textbf{/etc} : Archivos de configuracion del sistema.
+    \item \textbf{/bin} : Archivos binarios y ejecutables.
+    \item \textbf{/dev} : Enlace a dispositivos.
+    \item \textbf{/usr} : Aplicaciones de usuarios.
+    \item \textbf{/tmp} : Archivos temporales.
+    \item \textbf{/boot} : Informacion del booteo de la maquina.
+\end{itemize}
+
+\section{Bootstrap (Arranque del sistema)}
+\subsection{Que es la BIOS y que tarea realiza?}
+La BIOS es un chip instalado en la placa base con un firmware que contiene una serie de subrutinas basicas del procesador para el arranque del sistema. Actua como un intermediario entre la CPU y los dispositivos de I/O.
+
+\subsection{UEFI (Unified Extensible Firmware Interface)}
+La interfaz UEFI es una tecnologia que controla el arranque de la computadora, podria decirse que es una alternativa mas moderna y avanzada (e insegura) al sistema MBR creado por IBM. Algunas de sus caracteristicas son:
+\begin{itemize}
+    \item Interfaz mas moderna y facil de utilizar.
+    \item Mejor seguridad (?) durante el inicio.
+    \item Compatibilidad completa con procesadores de 64 bits.
+\end{itemize}
+
+\subsection{MBR (Master Boot Record)}
+El MBR es un sector reservado del disco fisico, este sector almacena la informacion de como los bloques del disco estan separados en particiones. Tambien contiene codigo (conocido como MBC (Master Boot Code)) que funciona como un loader del sistema operativo instalado.
+Limitado a discos de menos de 2TB de almacenamiento.
+
+\subsection{GPT (GUID partition table)}
+El sistema GPT es un sistema de particion de tablas es una sustitucion al sistema MBR.
+\begin{itemize}
+    \item Soporta hasta 128 particiones.
+    \item Soporta discos de hasta Zettabytes de tamanio.
+    \item Funciona con sistemas UEFI.
+    \item Utiliza un sistema de direccionamiento logico (LBA) en lugar de uno basado en los encabezados de los cilindros del disco.
+\end{itemize}
+
+
+
+\subsection{Gestores de arranque}
+Los gestores de arranque son programas que permiten elegir el cofigo a ejecutar en el proceso de arranque, generalmente a traves de un menu. Suelen instalarse en el MBR y asumen el rol de MBC. Su finalidad es la de cargar una imagen del kernel de alguna particion para su ejecucion. Algunos ejemplos son:
+\begin{itemize}
+    \item GRUB
+    \item LILO
+    \item NTLDR
+\end{itemize}
+
+\subsection{}
+
+\end{document}
