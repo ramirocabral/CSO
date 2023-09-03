@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1693529778 "main.tex" "main.pdf" "main" 1693529779 0
-  "/home/ramiro/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1693522374 12644 0cdb782b790941385e508332c3f10b6b ""
+["pdflatex"] 1693659702 "main.tex" "main.pdf" "main" 1693659702 0
+  "/home/ramiro/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk" 1693659702 12644 8c59acfd300dafe71a0063ba19411363 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1689853683 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1689853683 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1689853683 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -29,10 +29,10 @@
   "/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1689853683 30429 213676d4c7327a21d91ddaed900e7b81 ""
   "/usr/share/texmf-dist/tex/latex/tools/enumerate.sty" 1689853683 3468 46ba9177f0f0a79fe79845d3eebff113 ""
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1689853683 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1693516706 27758 38728abbce47239bb9c148cdc8c9e373 ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1693516706 6768057 37037e500b7b611d2bb268e6b932fda1 ""
-  "main.aux" 1693529778 3475 ecd09d8eb02ce25ca923692cba8435bc "pdflatex"
-  "main.tex" 1693529778 6515 c9cc553c7db7100f92e4d207ff7e1874 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1693658864 27758 38728abbce47239bb9c148cdc8c9e373 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1693658858 6768062 a4d2f28064ef3be3a5e0bf437fcd2637 ""
+  "main.aux" 1693659702 3475 ecd09d8eb02ce25ca923692cba8435bc "pdflatex"
+  "main.tex" 1693659615 6515 c9cc553c7db7100f92e4d207ff7e1874 ""
   (generated)
   "main.aux"
   "main.log"

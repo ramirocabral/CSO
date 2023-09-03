@@ -1,0 +1,166 @@
+\documentclass[11pt]{article}
+
+\userpackage{url}
+%! TEX root = "~/home/ramiro/Desktop/CSO/practicas/practica2/main.tex"
+
+\title{\Huge{Conceptos de Sistemas Operativos\\
+Practica 2}}
+\author{\huge{Ramiro Cabral}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\pagebreak
+
+\section{SystemV}
+\subsection{Proceso de Inicio en GNU/Linux}
+\begin{enumerate}
+    \item Se comienza a ejecutar el codigo del Bios.
+    \item El BIOS ejecuta el POST.
+    \item El bios lee el sector de arranque (MBR).
+    \item Se carga el gestor de arranque (MBC).
+    \item El bootloader carga el kernel y el initrd.
+    \item Se monta el initrd como sistema de archivos raiz y se inicializan componentes esenciales.
+    \item El kernel ejecuta el proceso init y se desmonta el initrd.
+    \item Se lee el /etc/inittab.
+    \item Se ejecutan los scripts apuntados pr el runlevel 1.
+    \item El final del runlevel 1 le indica que vaya al runlevel por defecto.
+    \item Se ejecutan los scipts apuntados por el runlevel por defetco.
+    \item El sistema esta listo para usarse.
+\end{enumerate}
+
+\subsection{Init}
+\textbf{initrd} :Es cargado como parte del procedimiento de booteo del kernel. Contiene un set minimio de ejecutables y archivos necesarios para la inicializacion del kernel del sistema.
+\begin{itemize}
+    \item Carga los subprocesos necesarios para el correcto funcionamiento del SO.
+    \item Posee el PID 1 y se encuentra usualmente en /sbin/init.
+    \item En SystemV se lo configura a traves del archivo /etc/inittab.
+    \item No tiene padre y es el padre de todos los procesos (pstree).
+    \item Es el encargado de montar los filesystems y de hacer disponible los demas dipositivos.
+\end{itemize}
+
+\subsection{RunLevels}
+\begin{itemize}
+    \item Hacen referencia al modo en que arranca Linux.
+    \item Define que servicios del sistema estan operando.
+    \item El proceso de arranque es dividido en diferentes niveles.
+    \item Se encuentran definidos en \textit{/etc/inittab}.
+    \item Syntaxis: \textbf{\textit{id:nivelesEjecucion:accion:proceso}}.
+    \begin{itemize}
+        \item \textbf{ID: }identifica la entrada en inittab.
+        \item \textbf{nivelesEjecucion: }el/los niveles de ejecucion en los que se realiza la accion.
+        \item \textbf{Accion: }describe la accion a realizar.
+        \item \textbf{Proceso: }proceso exacto que sera ejecutado.
+    \end{itemize}
+    \item Existen 7 distintos RunLevels, y cada uno puede iniciar un conjunto de procesos al arranque o apagado del sistema.
+    \item Los scripts que se ejecutan se encuentran en \textit{/etc/init.d}.
+    \item En \textit{/etc/rcX.d} (con X entre 0 y 6) hay links a los archivos del \textit{/etc/init.d}.
+    \item Formato de los links: \verb|[S-K]<orden><nombreScript>|.
+    \item Para administrar el orden de los enlaces simbolicos, y resolver dependencias entre ellos se utiliza \textbf{insserv}.
+    \item insserv usa cabeceras (De tipo LSB) en los scripts del init.d para especificar la relacion con otros scripts rc.
+\end{itemize}
+\section{Upstart}
+\begin{itemize}
+    \item Reemplazo propuesto para SystemV.
+    \item Ejecucion de trabajos en forma asincronica a traves de eventos, a diferencia de SystemV que es estrictamente sincronico (\textit{dependency-based}).
+    \item Estos trabajos se denominan \textbf{\textit{jobs}}.
+    \item Los jobs definen servicios o tareas a ser ejecutadas por init.
+    \item Son definidos en \textit{/etc/init}.
+    \item Los jobs son ejecutados ante eventos, y es posible crear nuestros propios eventos.
+    \item Cada job posee un objetivo (goal start/stop) y un estado (state).
+\end{itemize}
+
+\section{SystemD}
+
+\begin{itemize}
+    \item Sistema creado por RedHat (the devil himself) que centraliza la administracionde demons y librerias del sistema.
+    \item Mejora el paralelismo de booteo.
+    \item Puede ser controlado por el comando \textbf{\textit{systemctl}}.
+    \item Compatible con SystemV.
+    \item Los runlevels son reemplazados por \textbf{\textit{targets}}.
+    \item Las unidades de trabajo son denominadas \textbf{\textit{units}} de tipo:
+    \begin{itemize}
+        \item \textbf{\textit{Service:}} controla un servicio particular.
+        \item \textbf{\textit{Socket:}} encapsula, un IPC, un socket del sistema o filesystem.
+        \item \textbf{\textit{Target:}} agrupa units o establece puntos de sincronizacion.
+        \item \textbf{\textit{Snapshot:}} almacena el estado de un conjunto de unidades que puede ser restablecido mas tarde.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Activacion por Socket}
+\begin{itemize}
+    \item Es un mecanismo de iniciacion bajo demanda.
+    \item Cuando el socket recibe una conexion spawnea el servicio y le pasa el socket.
+    \item No hay necesidad de definir dependencias entre servicios, ya que se inician todos los sockets en primier medida.
+
+\subsection{cgroups}
+\begin{itemize}
+    \item Permite organizar un grupo de procesos en forma jerarquica.
+    \item Agrupa conjuntos de procesos realcionados.
+\end{itemize}
+\end{itemize}
+
+\subsection{fstab}
+
+\begin{itemize}
+    \item Define que particiones se montan al arranque.
+    \item Su configuracion se encuentra en \textbf{\textit{/etc/fstab}}.
+\end{itemize}
+
+\section{Usuarios en GNU/Linux}
+
+\begin{itemize}
+    \item Cada usuario debe poseer credenciales para acceder al sistema.
+        \begin{itemize}
+            \item \textit{root:} administrador del sistema (superuser).
+            \item \textit{otros:} usuarios del sistema estandar (\textit{/etc/sudoers}).
+        \end{itemize}
+    \item Archivos de configuracion:
+        \begin{itemize}
+            \item \textbf{\textit{/etc/passwd}}
+                \begin{itemize}
+                    \item Cada linea representa a un usuario.
+                    \item Posee informacion general del usuario (grupo,nombre,descripcion,homedir,shell,etc).
+                \end{itemize}
+            \item \textbf{\textit{/etc/group}}
+                \begin{itemize}
+                    \item Muestra cada grupo del sistema.
+                    \item Cada usuario puede tener grupos secundarios.
+                \end{itemize}
+            \item \textbf{\textit{/etc/shadow}}
+                \begin{itemize}
+                    \item Posee nombres y contrasenas encriptadas (solo accesible por el root).
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+\subsection{UID y GID}
+
+\begin{itemize}
+    \item Un \textbf{UID} (User identifier) es un numero asignado por Linux a cada usuario del sistema. Este numero es usado para identificar el usuario y para determinar a que recursos puede acceder.
+    \item Son almacenados en el archivo \textit{/etc/passwd}.
+    \item El Root posee el UID 0.
+    \item Las UID por debajo de 1000,por convencion, son reservadas para usuarios creados por el sistema, servicios y otras cuentas especiales.
+    \item Al crear un nuevo usuario, se le asignara un UID mayor a 1000.
+    \item Un \textbf{GID} (group identifier) es un numero asignado a cada grupo del sistema.
+    \item Son almacenados en el archivo \textit{/etc/groups}.
+    \item Los primeros 100 GIDs son reservados para el uso del sistema.
+    \item El GID 0 corresponde al grupoo root.
+    \item El GID 100 correponde al gruop 'users'.
+\end{itemize}
+
+\section{Procesos}
+\begin{itemize}
+\item Cuando un programa es ejecutado, el sistema le provee una instancia especial al proces. La instancia consiste en todos los servicios/recursos que podria utilizar el proceso en la ejecucion.
+\item Un numero de ID de 5 digitos es asignado al proceso, este numero es denominado \textbf{PID}. Cada proceso posee un unico PID.
+\item Un processo que se conecta a la terminal es llamado un \textbf{foreground job}. Es llamado asi ya que puede comunicarse con el usuario mediante la pantalla y el teclado.
+\item Un proceso que se desconecta de la terminal y no puede comunicarse con el usuario es llamado un \textbf{background job}.
+\item Si un proceso en background requiere inhteraccion con el usuario, el mismo se detiene y espera hasta establecer una conexion con la temrinal.
+\end{itemize}
+
+\section{Paquetes}
+\item Los paquetes son archivos que contienen archivos, y no utilizan ningun tipo de compresion.
+\item Los archivos comprimidos representan la compresion, utilizando algun tipo de algoritmo, de uno o varios archivos comunes.
+\item 
+
+\end{document}

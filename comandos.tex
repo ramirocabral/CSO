@@ -1,0 +1,74 @@
+\documentclass[11pt]{article}
+\usepackage[obeyspaces]{url}
+
+%! TEX root = "~/home/ramiro/Desktop/CSO/comandos.tex"
+
+\title{\Huge{Conceptos de Sistemas Operativos\\
+Comandos utiles en GNU/LInux}}
+\author{\huge{Ramiro Cabral}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\pagebreak
+
+\section*{chown}
+
+\textbf{\path{chown user:group /file}}\\
+
+Nos permite cambiar el usuario y/o grupo de un archivo.
+
+\section*{chgrp}
+Permite cambiar el grupo dueno de un archivo.
+
+\section*{chmod}
+Cambiar los permisos de un archivo (r/w/x).
+
+\section*{df}
+Nos informa el espacio usado por los filesystems.
+
+\section*{du}
+Informa el espacio en disco usado por cada archivo dentro del directorio especificado.
+
+\section*{who}
+Nos muestra los usuarios conectados al sistema.
+
+\section*{su}
+El comando nos permite ejecutar comandos con el GID o GDI de otro usuario temporalmente.
+
+\section*{passwd}
+Nos permite cambiar la password de un usuario.
+
+\section*{kill}
+Finaliza un proceso mediante su PID.
+
+\section*{killall}
+Finaliza todos los procesos que estan actualmente utilizando el/los procesos especificados.
+
+\section*{ps}
+Muestra informacion de una seleccion de procesos. Por defecto, ps selecciona todos los proceos con el mismo UID que el usuario actual y asociado con la misma terminal que el invocador.
+
+\section*{pstree}
+Muestra un arbol con los procesos corriendo en el sistema.
+
+\section*{nice}
+Ejecutar un programa con una prioridad de scheduling modificada.
+
+\section*{tar}
+
+Nos permite generar un solo archivo comprimido, que en su interior puede contener a un directorio completo o una serie de archivos.
+
+\begin{itemize}
+
+\item Para comprimir acrhivos:\\
+\textbf{\path{tar -cvf dir_plano.tar /ruta/al/dir_plano/}}\\
+
+\item Para mostrar el contenido dentro del paquete:\\
+\textbf{\path{tar -tf dir_plano.tar}}
+
+\item Para descomprimir el paquete:\\
+\textbf{\path{tar -xvf dir_plano.tar}}\\
+\end{itemize}
+
+\end{document}
+
