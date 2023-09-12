@@ -1,0 +1,34 @@
+\documentclass[11pt]{article}
+
+\usepackage{url}
+%! TEX root = "~/home/ramiro/Desktop/CSO/practicas/practica2/main.tex"
+
+\title{\Huge{Conceptos de Sistemas Operativos\\
+Practica 3}}
+\author{\huge{Ramiro Cabral}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\pagebreak
+\section{Argumentos y valor de retorno}
+\begin{enumerate}
+    \item \textbf{\$0} contiene la invocacion del script.
+    \item \textbf{\$1,\$2,\$3...} contienen cada uno de los argumentos.
+    \item \textbf{\$\#} contiene la cantidad de argumentos recibidos.
+    \item \textbf{\$*} contiene la lista de todos los argumentos.
+    \item \textbf{\$?} contiene en todo momento el valor de retorno del ultimo comando ejecutado.
+\end{enumerate}
+
+\section{exit}
+\begin{enumerate}
+    \item Causa la terminacion de un script.
+    \item Puede devolver cualquier valor entre 0 y 255.
+    \begin{enumerate}
+        \item El valor 0 indica que el script se ejecuto de forma exitosa.
+        \item Un valor distinto indica un codigo de error.
+        \item Se puede consultar el exit status imprimiendo la variable \$?.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
