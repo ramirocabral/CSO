@@ -34,7 +34,7 @@ Practica 2}}
 \begin{itemize}
     \item Carga los subprocesos necesarios para el correcto funcionamiento del SO.
     \item Posee el PID 1 y se encuentra usualmente en /sbin/init.
-    \item En SystemV se lo configura a traves del archivo /etc/inittab.
+    \item En SystemV se lo configura a traves del archivo \textit{/etc/inittab}.
     \item No tiene padre y es el padre de todos los procesos (pstree).
     \item Es el encargado de montar los filesystems y de hacer disponible los demas dipositivos.
 \end{itemize}
@@ -59,6 +59,7 @@ Practica 2}}
     \item Para administrar el orden de los enlaces simbolicos, y resolver dependencias entre ellos se utiliza \textbf{insserv}.
     \item insserv usa cabeceras (De tipo LSB) en los scripts del init.d para especificar la relacion con otros scripts rc.
 \end{itemize}
+
 \section{Upstart}
 \begin{itemize}
     \item Reemplazo propuesto para SystemV.
@@ -69,6 +70,7 @@ Practica 2}}
     \item Los jobs son ejecutados ante eventos, y es posible crear nuestros propios eventos.
     \item Cada job posee un objetivo (goal start/stop) y un estado (state).
 \end{itemize}
+
 
 \section{SystemD}
 
@@ -108,7 +110,6 @@ Practica 2}}
 \end{itemize}
 
 \section{Usuarios en GNU/Linux}
-
 \begin{itemize}
     \item Cada usuario debe poseer credenciales para acceder al sistema.
         \begin{itemize}
