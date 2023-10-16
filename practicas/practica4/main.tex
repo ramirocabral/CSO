@@ -113,6 +113,14 @@ Practica 4}}
         \end{itemize}
 \end{itemize}
 
+\subsection{VRR (Virtual Round Robin)}
+\begin{itemize}
+    \item Basado en RR.
+    \item Cuando un proceso regresa de una I/O, se coloca en una cola auxiliar.
+    \item Cuando se tiene que tomar el proximo proceso, los procesos en la cola auxiliar tienen prioridad sobre los demas.
+    \item Al elegir un proceso de la cola auxiliar, se le otorga el procesador por tantas unidades de tiempo como le falto ejecutar en su rafaga de CPU anterior.
+\end{itemize}
+
 \subsubsection{Timer Variable}
 \begin{itemize}
     \item El contador se inicializa en Q cada vez que un proceso es asignado a la CPU.
