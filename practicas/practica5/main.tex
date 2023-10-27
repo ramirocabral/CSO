@@ -203,4 +203,45 @@ Practica 5}}
     \item Mayor eficiencia al mover paginas hacia la memoria principal.
         \end{itemize}
 \end{itemize}
+\section{Reemplzao de paginas}
+\begin{itemize}
+    \item Cuando se produce un fallo de pagina, el SO debe decidir que pagina reemplazar.
+    \item El objetivo es minimizar el numero de fallos de pagina.
+    \item \textbf{Algoritmos de reemplazo de paginas:}
+        \begin{itemize}
+            \item \textbf{FIFO:} Se reemplaza la pagina que esta en memoria hace mas tiempo.
+            \item \textbf{LRU:} Se reemplaza la pagina que no se ha utilizado hace mas tiempo. Favorece a las paginas menos recientemente accedidas.
+            \item \textbf{FIFO (Segunda Chance:)} 
+                \begin{itemize}
+                    \item Se utiliza un bit adicional, llamado bit de referencia.
+                    \item Cuando la pagina se carga en memoria, el bit R se pone en 0.
+                    \item Cuando la pagina es referenciada, el bit R se pone en 1.
+                    \item La victima se busca en orden FIFO. Se selecciona la primer pagina cuyo bit R esta en 0.
+                    \item Mientras se busca a la victima, cada bit R que tiene el valor 1, se cambia a 0.
+                \end{itemize}
+        \end{itemize}
+        \item Cuando una pagina que fue modificada es reemplazada, se reserva uno o varios marcos para la descarga asincronica de paginas.
+            \begin{enumerate}
+                \item La pagina que provoco el fallo se coloca en un frame designado a la descarga asincronica.
+                \item El SO envia la orden de descargar asincronicamente la pagina modificada mientras continua la ejecucion de otro proceso.
+                \item El frame de descarga asincronica pasa a ser el que contiene la pagina victima que ya se descargo correctamente.
+            \end{enumerate}
+\end{itemize}
+\subsection{Alcance del reemplazo}
+\begin{itemize}
+    \item \textbf{Reemplazo local}
+        \begin{itemize}
+            \item El fallo de pagina de un proceso solo puede reemplazar sus propias paginas.
+            \item No cambia la cantidad de frames asignados.
+            \item El SO puede determinar cual es la tasa de page-faults de cada proceso.
+            \item Un proceso puede tener frames asignados que no usa, y no pueden ser usador por otros procesos.
+        \end{itemize}
+        \item \textbf{Reemplazo global}
+            \begin{itemize}
+                \item El fallo de pagina de un proceso puede reemplazar la pagina de cualquier proceso.
+                \item El SO no controla la tasa de page-faults de cada proceso.
+                \item Puede tomar frames de otro proceso, aumentando la cantidad de frames asignados a el.
+                \item Un proceso de alta prioridad podria tomar los frames de un proceso de menor prioridad.
+            \end{itemize}
+\end{itemize}
 \end{document}
