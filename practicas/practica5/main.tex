@@ -203,7 +203,25 @@ Practica 5}}
     \item Mayor eficiencia al mover paginas hacia la memoria principal.
         \end{itemize}
 \end{itemize}
-\section{Reemplzao de paginas}
+
+\subsection{Asignacion de marcos}
+La asignacion de marco se pueder realizar de dos modos:
+\begin{itemize}
+    \item \textbf{Asignacion fija:} a cada proceso se le asigna una cantidad arbitraria de marcos. A su vez para el reparto se puede usar:
+        \begin{itemize}
+            \item \textbf{Reparto equitativo:} se asigna la misma cantidad de marcos a cada proceso : $m / p$
+            \item \textbf{Reparto proporcional:} se asignan marcos en base a la necesidad de cada proceso : $V_p \cdot m /V_t$
+                \begin{itemize}
+                    \item $m$: cantidad de marcos.
+                    \item $V_p$: paginas usadas por el proceso.
+                    \item $V_t$: paginas usadas en total por todos los procesos.
+                \end{itemize}
+        \end{itemize}
+        \item \textbf{Asignacion dinamica:} se asignan marcos a los procesos segun la demanda.
+\end{itemize}
+
+
+\section{Reemplazo de paginas}
 \begin{itemize}
     \item Cuando se produce un fallo de pagina, el SO debe decidir que pagina reemplazar.
     \item El objetivo es minimizar el numero de fallos de pagina.
@@ -243,5 +261,18 @@ Practica 5}}
                 \item Puede tomar frames de otro proceso, aumentando la cantidad de frames asignados a el.
                 \item Un proceso de alta prioridad podria tomar los frames de un proceso de menor prioridad.
             \end{itemize}
+\end{itemize}
+
+
+\section{Hiperpaginacion (Trashing)}
+\begin{itemize}
+    \item Un sistema esta en estado de hiperpaginacion cuando pasa mas tiempo paginando que ejecutando procesos.
+    \item Generalmente sucede cuando el total de marcos disponibles en el sistema es inferior a la suima de los conjuntos de trabajo de cada proceso en ejecucion. Es decir, cuando los procesos en ejecucion no tienen suficientes marcos asignados como para mantener su conjunto de trabajo.
+    \item El SO, puede detectarlas mediante el control de la frecuencia de fallos de pagina.
+    \item Se pueden reasignar marcos de un proceso a otro.
+\end{itemize}
+\subsection{Anomalia de Belady}
+\begin{itemize}
+    \item Ocurre cuando al aumentar el numero de marcos en la memoria fisica, usando el algoritmo FIFO, aumenta el numero de Page-Faults.
 \end{itemize}
 \end{document}
