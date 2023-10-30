@@ -1,27 +1,32 @@
-\section{Conceptos Basicos}
+\pagebreak
+
+\section{Conceptos Básicos}
 \begin{itemize}
-    \item \textbf{Sistema Operativo:} Software que actua como intermediario entre el usuario de una computadora y su hardware.
-        \end{itemize}
-        \subsection{Objetivos de un SO}
-        \begin{itemize}
-            \item \textbf{Comodidad:} Hacer mas facil el uso del hardware.
-            \item \textbf{Eficiencia:} Hacer un uso mas eficiente de los recursos del sistema.
-            \item \textbf{Evolucion:} Permitira la introduccion de nuevas funciones al sistema sin interferir con funciones anteriores.
-        \end{itemize}
-        \subsection{Perspectiva desde el usuario}
-        \begin{itemize}
-            \item Abstrraccion con respecto a la arquitectura.
-            \item El SO "oculta" el hardware y presenta a los programas abstracciones mas simples de manejar.
-            \item Los programas de aplicacion son los clientes del SO.
-        \end{itemize}
-        \subsection{Perspectiva desde la administracion de recursos}
-        \begin{itemize}
-            \item Administra los recursos de HW de uno o mas procesos.
-            \item Probee un conjunto de servicios a los usuarios del sistema.
-            \item Maneja la memoria secundaria y los dispositivos de I/O.
-            \item Ejecucion simultanea de procesos.
-            \item Multiplexacion en tiempo (CPU) y en espacio (memoria).
-        \end{itemize}
+    \item \textbf{Sistema Operativo:} Software que actúa como intermediario entre el usuario de una computadora y su hardware.
+\end{itemize}
+
+\subsection{Objetivos de un SO}
+\begin{itemize}
+    \item \textbf{Comodidad:} Hacer más fácil el uso del hardware.
+    \item \textbf{Eficiencia:} Hacer un uso más eficiente de los recursos del sistema.
+    \item \textbf{Evolución:} Permitirá la introducción de nuevas funciones al sistema sin interferir con funciones anteriores.
+\end{itemize}
+
+\subsection{Perspectiva desde el usuario}
+\begin{itemize}
+    \item Abstracción con respecto a la arquitectura.
+    \item El SO "oculta" el hardware y presenta a los programas abstracciones más simples de manejar.
+    \item Los programas de aplicación son los clientes del SO.
+\end{itemize}
+
+\subsection{Perspectiva desde la administración de recursos}
+\begin{itemize}
+    \item Administra los recursos de HW de uno o más procesos.
+    \item Provee un conjunto de servicios a los usuarios del sistema.
+    \item Maneja la memoria secundaria y los dispositivos de E/S.
+    \item Ejecución simultánea de procesos.
+    \item Multiplexión en tiempo (CPU) y en espacio (memoria).
+\end{itemize}
 
 \subsection{Componentes de un SO}
 \begin{itemize}
@@ -32,36 +37,36 @@
 
 \subsubsection{Kernel}
 \begin{itemize}
-    \item Porcion de codigo que se encuentra en memoria principal y se encarga de la administracion de los recursos.
+    \item Porción de código que se encuentra en memoria principal y se encarga de la administración de los recursos.
     \item Implementa servicios esenciales:
         \begin{itemize}
-            \item Manejode la memoria y la entrada/salida.
+            \item Manejo de la memoria y la entrada/salida.
             \item Manejo de la CPU.
-            \item Administracion de procesos.
+            \item Administración de procesos.
         \end{itemize}
 \end{itemize}
 
 \subsection{Servicios de un SO}
 \begin{itemize}
-    \item Administracion y planificacion del procesador.
-    \item Administracion de la memoria.
-    \item Administracion del almacemaniento/sistema de archivos.
-    \item Administracion de dispositivos.
-    \item Deteccion de errores y respuestas.
+    \item Administración y planificación del procesador.
+    \item Administración de la memoria.
+    \item Administración del almacenamiento/sistema de archivos.
+    \item Administración de dispositivos.
+    \item Detección de errores y respuestas.
         \begin{itemize}
             \item Errores de HW internos y externos.
             \item Errores de SW.
-            \item Incapacidad del SO para conceder una solicitud de una aplicacion.
+            \item Incapacidad del SO para conceder una solicitud de una aplicación.
         \end{itemize}
-        \item Interaccion con el usuario (Shell).
-        \item Telemetria.
+    \item Interacción con el usuario (Shell).
+    \item Telemetría.
 \end{itemize}
+
 \subsection{Errores que un SO debe evitar}
 \begin{itemize}
     \item Que un proceso se apropie de la CPU.
-    \item Que un proceso intente ejecutar instrucciones de E/s por ejemplo.
-        \item Que un proceso intente acceder a una direccion de memoria que no le corresponde.
+    \item Que un proceso intente ejecutar instrucciones de E/S, por ejemplo.
+    \item Que un proceso intente acceder a una dirección de memoria que no le corresponde.
 \end{itemize}
-
 
 \pagebreak

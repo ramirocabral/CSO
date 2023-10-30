@@ -1,47 +1,48 @@
 \pagebreak
+
 \section{Procesos}
 \begin{itemize}
-    \item Programa en ejecucion.
+    \item Programa en ejecución.
     \item \textbf{Programa:}
         \begin{itemize}
-            \item Es estacico.
-            \item No tiene program counter.
-            \item Existe desde que se edita hasta que se boora.
+            \item Es estático.
+            \item No tiene contador de programa.
+            \item Existe desde que se edita hasta que se borra.
         \end{itemize}
     \item \textbf{Proceso:}
         \begin{itemize}
-            \item Es dinamico.
-            \item Tiene program counter.
+            \item Es dinámico.
+            \item Tiene contador de programa.
             \item Su ciclo de vida comprende desde que se solicita ejecutar hasta que termina.
         \end{itemize}
 \end{itemize}
 
 \subsection{Atributos de un proceso}
 \begin{itemize}
-    \item Identificaion del proceso y del proceso padre.
-    \item Identificacion del usuario que lo disparo.
-    \item Si hay estructura de grupos, grupo que lo dispario.
-    \item En ambientes multiusuario, desde que terminal y quien lo ejecuto.
+    \item Identificación del proceso y del proceso padre.
+    \item Identificación del usuario que lo disparó.
+    \item Si hay estructura de grupos, grupo que lo disparó.
+    \item En ambientes multiusuario, desde qué terminal y quién lo ejecutó.
 \end{itemize}
 
 \subsection{Componentes de un proceso}
 \begin{itemize}
-    \item Seccion de codigo.
-    \item Seccion de Datos.
+    \item Sección de código.
+    \item Sección de Datos.
     \item Stack(s): Datos temporarios.
 \end{itemize}
 
 \subsection{Process Control Block (PCB)}
 \begin{itemize}
-    \item Estructura de datos asociada al proceso (abstraccion).
+    \item Estructura de datos asociada al proceso (abstracción).
     \item Existe una por proceso.
-    \item Es lo primero que se crea cuando se crea un proceso y lo ultimo que se borra cuando termina.
-    \item Contiene la informacion asociada con cada proceso:
+    \item Es lo primero que se crea cuando se crea un proceso y lo último que se borra cuando termina.
+    \item Contiene la información asociada con cada proceso:
         \begin{itemize}
             \item PID, PPID, etc.
             \item Valores de los registros de la CPU.
-            \item Planificacion.
-            \item Ubicacion en memoria.
+            \item Planificación.
+            \item Ubicación en memoria.
             \item Accounting.
             \item Entrada/Salida.
         \end{itemize}
@@ -49,17 +50,17 @@
 
 \subsubsection{Stacks}
 \begin{itemize}
-    \item Un proceso cuenta con 1 o mas stacks.
-    \item Se crean automaticamente y su medida se ajusta en run-time.
-    \item Esta formado por stack frames que son pushed (al llamar una rutina) y popped (cuando se retorna de ella).
-    \item el stack frametiene los parametros de la rutina y los datos necesarios para recuperar el stack frame anterios.
+    \item Un proceso cuenta con 1 o más stacks.
+    \item Se crean automáticamente y su medida se ajusta en run-time.
+    \item Está formado por stack frames que son pushed (al llamar una rutina) y popped (cuando se retorna de ella).
+    \item El stack frame tiene los parámetros de la rutina y los datos necesarios para recuperar el stack frame anterior.
 \end{itemize}
 
 \subsection{Espacio de direcciones de un proceso}
 \begin{itemize}
     \item Conjunto de direcciones de memoria que ocupa el proceso.
     \item No incluye su PCB o tablas asociadas.
-    \item Un proceso en modo usuario solo puede acceder a su espacio de direcicones.
+    \item Un proceso en modo usuario solo puede acceder a su espacio de direcciones.
     \item En modo Kernel, se puede acceder a estructuras internas (PCB del proceso) o a espacio de direcciones de otros procesos.
 \end{itemize}
 \begin{figure}[ht]
@@ -72,14 +73,14 @@
 
 \subsection{Contexto de un proceso}
 \begin{itemize}
-    \item Inclute toda la informacion que el So necesita para administrar el proceso, y la CPu para ejecutarlo correctamente.
-    \item Son parte del contexto, los registros de cpu, inclusive cl contador del programa, prioridad, etc.
+    \item Incluye toda la información que el SO necesita para administrar el proceso, y la CPU para ejecutarlo correctamente.
+    \item Son parte del contexto, los registros de CPU, inclusive el contador del programa, prioridad, etc.
 \end{itemize}
 \subsubsection{Context Switch}
 \begin{itemize}
-    \item Se produce cuando la cpu cambia de un proceso a otro.
-    \item Se debe resguardar el contexto del proceso saliente, que pasa a espera y retornara despues a la CPU.
-    \item Se debe cargar el contexto del nuevo proceso y comenzar desde la instruccion siguiente a la ultima ejecutada en dicho contexto.
+    \item Se produce cuando la CPU cambia de un proceso a otro.
+    \item Se debe resguardar el contexto del proceso saliente, que pasa a espera y retornará después a la CPU.
+    \item Se debe cargar el contexto del nuevo proceso y comenzar desde la instrucción siguiente a la última ejecutada en dicho contexto.
     \item Es tiempo no productivo de la CPU.
     \item El tiempo que consume depende del soporte de HW.
 \end{itemize}
@@ -90,18 +91,17 @@
     \caption{Context Switch}\label{fig:}
 \end{figure}
 
-\subsection{Ejecucion del Kernel}
+\subsection{Ejecución del Kernel}
 \begin{itemize}
-    \item El kernel es un conjunto de modulos de software.
-    \item Se ejecuta en el procesdor como cualquier otro proceso.
+    \item El kernel es un conjunto de módulos de software.
+    \item Se ejecuta en el procesador como cualquier otro proceso.
     \item Existen diferentes enfoques de diseño:
 \end{itemize}
 \subsubsection{El kernel como entidad independiente}
 \begin{itemize}
     \item El kernel se ejecuta fuera de todo proceso.
-    \item El kernel se ejecuta fuera de todo proceso.
     \item Cuando un proceso es interrumpido o realiza una System Call, el contexto del proceso se salva y el control se pasa al Kernel del SO.
-    \item el Kernel posee su propia region de memoria y su propio Stack.
+    \item El kernel posee su propia región de memoria y su propio Stack.
     \item Finalizada su actividad, le devuelve el control al proceso.
     \item El kernel NO es un proceso.
     \item Se ejecuta como una entidad independiente en modo privilegiado.
@@ -110,20 +110,20 @@
     \begin{center}
         \includegraphics[width=0.45\textwidth]{assets/Kernel1.eps}
     \end{center}
-    \caption{Kernel como identidad independiente}\label{fig:}
+    \caption{Kernel como entidad independiente}\label{fig:}
 \end{figure}
 
 \vspace{2cm}
 
 \subsubsection{El kernel "dentro" del proceso}
 \begin{itemize}
-    \item El codigo del Kernel se encuentra dentro del espacio de direcciones de cada proceso.
-    \item El Kernel se ejecuta en el mismo contexto que algun proceso de usuario.
-    \item El Kernel se puede ver como una coleccion de rutinas que el proceso utiliza.
-    \item Dentro de un proceso se encuentra el codigo del programa y el codigo de los modulos SW del SO (kernel).
+    \item El código del Kernel se encuentra dentro del espacio de direcciones de cada proceso.
+    \item El Kernel se ejecuta en el mismo contexto que algún proceso de usuario.
+    \item El Kernel se puede ver como una colección de rutinas que el proceso utiliza.
+    \item Dentro de un proceso se encuentra el código del programa y el código de los módulos SW del SO (kernel).
     \item Cada proceso tiene un stack en modo usuario y otro en modo Kernel. 
-    \item Cada interrupcion es atendida en el contexto del proceso que se encontraba en ejecucion(en modo kernel).
-    \item Si el SO determina que el proceso debe seguir ejecutandose luego de atender la interrupcion, cambia a modo usuario y devuelve el control.
+    \item Cada interrupción es atendida en el contexto del proceso que se encontraba en ejecución (en modo kernel).
+    \item Si el SO determina que el proceso debe seguir ejecutándose luego de atender la interrupción, cambia a modo usuario y devuelve el control.
 \end{itemize}
 \vspace{2cm}
 \begin{figure}[ht]
@@ -138,7 +138,7 @@ En su estado de vida, un proceso pasa por diferentes estados:
 \begin{itemize}
     \item \textbf{Nuevo (new)}.
     \item \textbf{Listo (ready)}.
-    \item \textbf{Ejecucion (running)}.
+    \item \textbf{Ejecución (running)}.
     \item \textbf{En espera/bloqueado (waiting/blocked)}.
     \item \textbf{Terminado (terminated)}.
 \end{itemize}
@@ -150,27 +150,28 @@ En su estado de vida, un proceso pasa por diferentes estados:
     \caption{Estados de un proceso}\label{fig:}
 \end{figure}
 
+
 \pagebreak
-\subsection{Colas en la planificacion de procesos}
+\subsection{Colas en la planificación de procesos}
 \begin{itemize}
-    \item Para realizar al planificacion, el SO utiliza la PCB de cada proceso como una abstraccion del mismo.
+    \item Para realizar la planificación, el SO utiliza la PCB de cada proceso como una abstracción del mismo.
     \item Las PCB se enlazan en colas siguiendo un orden determinado.
 \end{itemize}
 \begin{figure}[h]
     \begin{center}
         \includegraphics[width=0.75\textwidth]{assets/ProcessQueue.eps}
     \end{center}
-    \caption{Colas de Planificacion}\label{fig:}
+    \caption{Colas de Planificación}\label{fig:}
 \end{figure}
 
-\subsubsection{Modulos de la planificacion}
+\subsubsection{Módulos de la planificación}
 \begin{itemize}
-    \item Son modulos de SW del Kernel que realizan distiintas tareas asociadas a la planificacion.
+    \item Son módulos de SW del Kernel que realizan distintas tareas asociadas a la planificación.
     \item Se ejecutan ante determinados eventos:
     \begin{itemize}
-        \item Creacion/Terminacion de procesos.
-        \item Eventos de sincronizacion.
-        \item Finalizacion de lapso de tiempo.
+        \item Creación/Terminación de procesos.
+        \item Eventos de sincronización.
+        \item Finalización de lapso de tiempo.
         \item Etc.
     \end{itemize}
     \item Existen 3 schedulers:
@@ -179,7 +180,7 @@ En su estado de vida, un proceso pasa por diferentes estados:
             \item \textbf{Short Term Scheduler} 
             \item \textbf{Medium Term Scheduler} 
         \end{itemize}
-    \item \textbf{Dispatcher:} realiza el cambio de contexto, cambio de modo ejecucion y despacha el proceso elegido por el Short Term.
+    \item \textbf{Dispatcher:} realiza el cambio de contexto, cambio de modo de ejecución y despacha el proceso elegido por el Short Term.
     \item \textbf{Loader} carga en memoria el proceso elegido por el long term.
 \end{itemize}
 \begin{figure}[h]
@@ -194,18 +195,18 @@ En su estado de vida, un proceso pasa por diferentes estados:
 \begin{itemize}
     \item \textbf{Long Term Scheduler}
         \begin{itemize}
-            \item Controla el grado de multiprogramacion.
+            \item Controla el grado de multiprogramación.
             \item Puede no existir este scheduler y absorber esta tarea el de short term.
         \end{itemize}
     \item \textbf{Medium Term Scheduler}
         \begin{itemize}
-    \item Si es necesario, reduce el grado de multiprogramacion.
-    \item Saca temporalmente de memoria los procesos que sea necesario para mantener el equilibrio del sistema.
+    \item Si es necesario, reduce el grado de multiprogramación.
+    \item Saca temporalmente de memoria los procesos que sean necesarios para mantener el equilibrio del sistema.
 \end{itemize}
 \item \textbf{Short Term Scheduler}
 \begin{itemize}
-    \item Decide a cual de los procesos en la cola de listos se elige para que use la CPU.
-    \item Terminos asociados: apropiativo, no apropiativo, algoritmo de scheduling.
+    \item Decide a cuál de los procesos en la cola de listos se elige para que use la CPU.
+    \item Términos asociados: apropiativo, no apropiativo, algoritmo de scheduling.
 \end{itemize}
 \end{itemize}
 
@@ -225,19 +226,19 @@ En su estado de vida, un proceso pasa por diferentes estados:
         \end{itemize}
     \item \textbf{Listo (ready):}
         \begin{itemize}
-            \item Luego que el Long Term Scheduler elige al proceo para cargarlo en memoria, el proceso queda en estado listo.
+            \item Luego de que el Long Term Scheduler elige al proceso para cargarlo en memoria, el proceso queda en estado listo.
             \item El proceso solo necesita que se le asigne CPU.
-            \item Esta en la cola de procesos listos (ready queue).
+            \item Está en la cola de procesos listos (ready queue).
         \end{itemize}
-    \item \textbf{Ejecucion (running):}
+    \item \textbf{Ejecución (running):}
         \begin{itemize}
-            \item El Long Term Scheduler lo eligio para asignarle CPU.
-            \item Tendra la CPU hasta que se termine el periodo de tiempo asignado, termine o hasta que necesite realizar alguna operacion de E/S.
+            \item El Long Term Scheduler lo eligió para asignarle CPU.
+            \item Tendrá la CPU hasta que se termine el período de tiempo asignado, termine o hasta que necesite realizar alguna operación de E/S.
         \end{itemize}
     \item \textbf{En espera/bloqueado (waiting/blocked):}
     \begin{itemize}
         \item El proceso necesita que se cumpla el evento esperado para continuar.
-        \item El evento puede ser la terminacion de una E/S solicitada, o la llegada de una senal por parte de otro proceso.
+        \item El evento puede ser la terminación de una E/S solicitada, o la llegada de una señal por parte de otro proceso.
         \item Sigue en memoria, pero no tiene la CPU.
         \item Sigue en memoria, pero no tiene la CPU.
     \end{itemize}
@@ -246,25 +247,25 @@ En su estado de vida, un proceso pasa por diferentes estados:
 \subsection{Comportamiento de los procesos}
 \begin{itemize}
     \item \textbf{CPU-bound:} mayor parte del tiempo utilizando la CPU.
-    \item \textbf{I/O bound:} mayor parte del tiempo eeperando por I/O.
+    \item \textbf{I/O bound:} mayor parte del tiempo esperando por I/O.
 \end{itemize}
 
-\subsection{Algoritmos de Planificacion}
+\subsection{Algoritmos de Planificación}
 \begin{itemize}
-    \item \textbf{Planificacion:} necesidad de determinar cual de todos los procesos que estan listos para ejecutarse, sera el proximo en ejecutarse.
-    \item \textbf{Algoritmos Preemmtive:} existen situaciones que hacen que el proceso en ejecucion sea expulsado de la CPU.
-    \item \textbf{Algoritmos No Preemmtive:} los procesos se ejecutan hasta que el mismo (por su propia cuenta) abandone la CPU.
+    \item \textbf{Planificación:} necesidad de determinar cuál de todos los procesos que están listos para ejecutarse, será el próximo en ejecutarse.
+    \item \textbf{Algoritmos Preemptive:} existen situaciones que hacen que el proceso en ejecución sea expulsado de la CPU.
+    \item \textbf{Algoritmos No Preemptive:} los procesos se ejecutan hasta que el mismo (por su propia cuenta) abandone la CPU.
 \end{itemize}
 
-\subsection{Algoritmos segun el tipo de proceso}
+\subsection{Algoritmos según el tipo de proceso}
 \subsubsection{Procesos Batch}
 \begin{itemize}
-    \item No existen usuarios que esperen una respuesta en la termina.
+    \item No existen usuarios que esperen una respuesta en la terminal.
     \item Se pueden utilizar algoritmos no apropiativos.
     \item Metas propias de este tipo de algoritmos:
         \begin{itemize}
-            \item Rendimiento: Maximizar  numero de trabajos por hora.
-            \item Tiempo de Retorno: Minimizar los tiempos entre el comienzo y la finalizacion.
+            \item Rendimiento: Maximizar el número de trabajos por hora.
+            \item Tiempo de Retorno: Minimizar los tiempos entre el comienzo y la finalización.
             \item El tiempo de espera se puede ver afectado.
             \item Uso de la CPU: Mantener la CPU ocupada la mayor cantidad de tiempo posible.
         \end{itemize}
@@ -272,31 +273,31 @@ En su estado de vida, un proceso pasa por diferentes estados:
 
 \subsubsection{Procesos Interactivos}
 \begin{itemize}
-    \item No solo interaccion con los usuarios.
+    \item No solo interacción con los usuarios.
     \item Son necesarios algoritmos apropiativos para evitar que un proceso acapare la CPU.
     \item Metas propias de este tipo de algoritmos:
     \begin{itemize}
-        \item Tempo de respuesta: Responder a peticiones con rapidez.
-        \item Proporcionalidad: Cumplir con expectativas de los usuarios. Por ej: al poner STOP al reproductor de musica, debe dejar de ser reproducida en un tiempo corto.
+        \item Tiempo de respuesta: Responder a peticiones con rapidez.
+        \item Proporcionalidad: Cumplir con las expectativas de los usuarios. Por ejemplo, al poner STOP al reproductor de música, debe dejar de ser reproducida en un tiempo corto.
     \end{itemize}
 \end{itemize}
 
-\subsection{Creacion de procesos}
+\subsection{Creación de procesos}
 \begin{itemize}
-    \item Un proceso es creaado por otro proceso.
-    \item Un proceso padre tiene uno o mas procesos hijos.
-    \item Se forma un arbol de procesos.
-    \item Actividades en la creacion:
+    \item Un proceso es creado por otro proceso.
+    \item Un proceso padre tiene uno o más procesos hijos.
+    \item Se forma un árbol de procesos.
+    \item Actividades en la creación:
     \begin{itemize}
         \item Crear la PCB.
-        \item Asignar PID unico.
+        \item Asignar PID único.
         \item Asignarle memoria para regiones.
         \item Crear estructuras de datos asociadas.
     \end{itemize}
 \end{itemize}
 
-\subsubsection{Relacion entre procesos padre e hijo}
+\subsubsection{Relación entre procesos padre e hijo}
 \begin{itemize}
-    \item El padre puede continuar ejcutandose concurrentemente con su hijo.
-    \item El padre puede esperar a que el/los procesos hijos terminen para continuar la ejecucion.
+    \item El padre puede continuar ejecutándose concurrentemente con su hijo.
+    \item El padre puede esperar a que el/los procesos hijos terminen para continuar la ejecución.
 \end{itemize}
