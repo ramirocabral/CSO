@@ -1,0 +1,55 @@
+\section{Apoyo del Hardware}
+\begin{itemize}
+    \item Modos de Ejecucion: Limitaciones en el conjunto de instrucciones que se puede ejecutar en cada modo.
+    \item Interrupcion de Clock: Se debe evitar que un proceso se apropie de la CPU.
+    \item Protecicion de la Memoria: Se deben definir limites de memoria a los que puede acceder cada proceso.
+\end{itemize}
+
+\subsection{Modos de Ejecucion}
+\begin{itemize}
+    \item Un bit en la CPU indica el modo actual.
+    \item Las intrucciones privilegiadas solo pueden ejecutarse en modo \textbf{supervisor/Kernel}.
+    \item En modo \textbf{Usuario}, el proceso puede acceder solo a su espacio de direcciones, es decir, a las direcicones "propias".
+    \item El kernel del SO se ejecuta en modo supervisor.
+    \item El resto del SO y los programas de usuario se ejecutan en modo usuario.
+\end{itemize}
+
+\subsubsection{Modo Kernel}
+\begin{itemize}
+    \item \textbf{Gestion de procesos:} Creacion y terminacion, planificacion, intercambio, sincronizacion y soporte para la comunicacion entre procesos.
+    \item \textbf{Gestion de memoria:} Reserva de espacio de direcciones para los procesos, Swapping, Gestion de Paginas.
+    \item \textbf{Gestion E/S:} Gestion de buffers, reserva de canales de E/S y de dispositivos de los procesos.
+    \item \textbf{Funciones de soporte:} Gestion de interrupciones, auditoria, monitoreo.
+    \item Cada vez que comienza a ejecutarse un proceso de usuario, el bit de modo se debe poner en modo usuario.
+    \item Cuando hay una trap, el bit de modo se pone en modo Kernel. Esta es la unica forma de pasar a modo Kernel.
+\end{itemize}
+\subsubsection{Modo Usuario}
+\begin{itemize}
+    \item Debug de procesos, defginicion de protocolos de comunicacion, gestion de aplicaciones.
+    \item Tareas que no requieran accesos privilegiados.
+    \item No se puede interactuar con el hardware.
+    \item Cada proceso trabaja en su propio espacio de direcciones.
+\end{itemize}
+
+\subsection{Proteccion de la E/S}
+\begin{itemize}
+    \item Las instruccines de E/S se definen como privilegiadas.    
+    \item Deben ejecutarse en Modo Kernel.
+        \item Los procesos de usuario realizan E/S a traves de System Calls.
+\end{itemize}
+
+\subsection{Proteccion de la CPU}
+\begin{itemize}
+    \item Uso de interrupcion por clock para evitar que un proceso se apropie de la CPU.
+    \item las instrucciones que modifican el funcionamiento del reloj son privilegiadas.
+\end{itemize}
+
+
+
+\subsection{System Calls}
+\begin{itemize}
+    \item Forma en que los programas de usuario acceden a los servicios del SO.
+    \item Los parametros asociados a las llamadas pueden pasarse de varias maneras: por registros, bloques, tablas en memoria o la pila.
+    \item Se ejecutan en modo kernel.
+\end{itemize}
+
