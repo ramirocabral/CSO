@@ -125,7 +125,7 @@
     \item Cada interrupción es atendida en el contexto del proceso que se encontraba en ejecución (en modo kernel).
     \item Si el SO determina que el proceso debe seguir ejecutándose luego de atender la interrupción, cambia a modo usuario y devuelve el control.
 \end{itemize}
-\vspace{2cm}
+\vspace{1cm}
 \begin{figure}[ht]
     \begin{center}
         \includegraphics[width=0.50\textwidth]{assets/Kernel2.eps}
@@ -151,7 +151,6 @@ En su estado de vida, un proceso pasa por diferentes estados:
 \end{figure}
 
 
-\pagebreak
 \subsection{Colas en la planificación de procesos}
 \begin{itemize}
     \item Para realizar la planificación, el SO utiliza la PCB de cada proceso como una abstracción del mismo.
@@ -163,6 +162,7 @@ En su estado de vida, un proceso pasa por diferentes estados:
     \end{center}
     \caption{Colas de Planificación}\label{fig:}
 \end{figure}
+\pagebreak
 
 \subsubsection{Módulos de la planificación}
 \begin{itemize}
@@ -183,11 +183,12 @@ En su estado de vida, un proceso pasa por diferentes estados:
     \item \textbf{Dispatcher:} realiza el cambio de contexto, cambio de modo de ejecución y despacha el proceso elegido por el Short Term.
     \item \textbf{Loader} carga en memoria el proceso elegido por el long term.
 \end{itemize}
+\pagebreak
 \begin{figure}[h]
     \begin{center}
         \includegraphics[width=0.90\textwidth]{assets/Schedulers.eps}
     \end{center}
-    \caption{Schedulers}\label{fig:}
+    \caption{Funcionamiento de los Schedulers}\label{fig:}
 \end{figure}
 
 
