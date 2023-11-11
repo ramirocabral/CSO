@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{array}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+%matriz ampliada
+\newcommand{\uvec}[1]{\boldsymbol{\hat{\textbf{#1}}}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\AtBeginEnvironment{pmatrix}{\setlength{\arraycolsep}{5pt}}
+
+%! TEX root = "~/home/ramiro/main.tex"
+\setlength{\parindent}{0pt}
+\title{\Huge{Conceptos de Sistemas Operativos\\
+Practica 6}}
+\author{\huge{Ramiro Cabral}}
+\date{}
+
+\begin{document}
+\maketitle
+\pagebreak
+\section{Administracion de E/S}
+
+
+\subsection{Metas del SO}
+El SO debe garantizar el manejo de los dispositivos de E/S de manera uniforma, estandarizada. Tambien se deben ocultar la mayoria de los detalles del dispositivo en las rutinas de niveles mas bajos, en terminos de operaciones comunes como "read", "write", etc.
+
+\begin{itemize}
+    \item \textbf{Eficiencia:} Los dispositivos de I/O pueden resultar muy lentos respectos a la memoria y a la CPU.
+El uso de la multi-programacion permite que un proceso espere por la finalizacion de su I/O mientras que otro proceso se ejecuta.
+\item \textbf{Planificacion:} Organizacion de los requerimientos a los dispositivos.
+\end{itemize}
+
+
+\subsection{Clasificacion de los dispositivos}
+\begin{itemize}
+    \item \textbf{Oriendatos a bloques:} transmiten datos en bloques (paquetes) y por esa razon son usados a menudo para la transmision paralela de datos utilizando el buffer de datos del S.O. Por ejemplo: disco magnetico.
+    \item \textbf{Orientados a flujos:} utilizan transmision en secuencia de datos sin usar buffer, transmitiendo un bit o un byte a la vez. Aceptan o entragan un flujo de datos sin considerar estructuras de bloques. No son direccionables, por lo que no permiten operaciones de busqueda.
+\end{itemize}
+
+Para realizar una correcta administracion de los dispositivos de I/O, el SO debe considerar sus diferencias:
+\begin{itemize}
+    \item Heterogeneidad de dispotivos.
+    \item Caracterticas de los dispotivos.
+    \item Velocidad.
+    \item Nuevos tipos de dispositivos.
+    \item Diferentes tipos de dispositivos.
+\end{itemize}
+
+\subsection{Tecnicas de E/S}
+Existen distintas tecnicas de E/S, en las que tanto el software (SO) y el hardware trabajan en conjunto:
+\begin{itemize}
+    \item \textbf{E/S programada:} El procesador envia un mandato de E/S, a peticion de un proceso, a un modulo de E/S. A continuacion, el proceso realiza una espera activa hasta que se complete la operacion antes de continuar.
+    \item \textbf{E/S dirigida por interrupciones:} La CPU emite un mandato de E/S a peticion de un proceso y continua ejecutando las instrucciones siguientes, siendo interrumpido por el modulo de E/S cuando este ha completado su trabajo.
+    \item \textbf{DMA (Direct Memory Access):} Un modulo de DMA controla el intercambio de datos entre la memoria principal y un modulo de E/S. El procesador manda una peticion de transferencia de un bloque de datos al modulo de DMA, y resulta interrumpido solo cuando se haya transferido el bloque completo.
+\end{itemize}
+
+A su vez, las distintas tecnicas de E/S pueden trabajar de dos formas:
+\begin{itemize}
+    \item \textbf{Memory mapped:} Los dispotivos y memoria comparten el espacio de direcciones, I/O es equivalente a escribir/leer en la memoria, por lo que no hay instrucciones especiales para la memoria.
+    \item \textbf{E/S aislada:} Hay un espacio separado de direcciones para I/O. Se necesitan lineas de I/O. Se requieren de instrucciones especiales de I/O (conjunto limitado).
+\end{itemize}
+
+
+\subsection{Drivers}
+Consisten en una interfaz entre el SO y el Hardware cargadas como modulos en el espacio de memoria del Kernel, conteniendo el codigo dependiente del dispositivo para manejar el mismo y traducir requerimientos abstractos en los comandos para el dispositivo manejado.
+
+
+
+
+\section{HDDs}
+
+\subsection{Organizacion Fisica de un HDD}
+\begin{itemize}
+    \item \textbf{Plato}: Es una de las superficies del disco. Cada plato tiene dos caras.
+    \item \textbf{Pista}: Es una circunferencia en la superficie del disco. Son concentricas y cad una contiene a varios sectores.
+    \item \textbf{Cilindro}: Se forma al alinear verticalmente todas las pistas en los diferentes discos del disco duro que se encuentran enla misma posicion radial.
+    \item \textbf{Sector}: Unidad de almacenamiento mas pequeña de un disco duro. Cada sector contiene una cantidad fija de bytes (generalmente, 512 bytes).
+        como unidad de asignacion de espacio en el disco. La cantidad de sectores en un cluster puede variar.
+    \item \textbf{Clusters}: Los clusters son grupo de sectores contiguos que se utilizan 
+    \item \textbf{Cabezal}: Es el elemento que lee y escribe los datos en el disco. Hay un cabezal por cada superficie del disco.
+\end{itemize}
+La capacidad de un disco esta dada por:
+\begin{itemize}
+    \item $W$: Cantidad de caras.
+    \item $X$: Cantidad de pistas.
+    \item $Y$: Cantidad de sectores por pista.
+    \item $Z$: Tamaño de cada sector.
+\end{itemize}
+
+\begin{equation}
+Capacidad = W \cdot X \cdot Y \cdot Z
+    \label{eq:1}
+\end{equation}
+
+
+\subsection{Tiempo de acceso a un HDD}
+El tiempo de acceso a un HDD esta dado por:
+\begin{itemize}
+    \item \textbf{Seek Time}: Tiempo que tarda el cabezal en posicionarse sobre la pista deseada.
+    \item \textbf{Latency time}: Tiempo que pasa desde que el cabezal se posiciona en el clindro hasta que el sector en cuestion pasa por debajo de la misma. Si no se conoce, se considera que es igual a lo que tarda el disco en dar media vuelta.
+    \item \textbf{Transfer time}: Tiempo de transferencia del sector (blqoue) del disco a memoria.
+\end{itemize}
+Para el \textbf{Almacenamiento secuencial} el tiempo de acceso esta dado por:
+
+\begin{equation}
+    seek + latency + (tiempo\_transf\_bloque \cdot cantidad\_bloques)
+    \label{eq:2}
+\end{equation}
+Para el \textbf{Almacenamiento aleatorio}, el tiempo esta dado por:
+
+\begin{equation}
+    (seek + latency + tiempo\_transf\_bloque)  \cdot cantidad\_bloques
+    \label{eq:3}
+\end{equation}
+
+
+\subsection{Algoritmos de planificacion en un HDD}
+El objetivo de los algoritmos de planificacion es minimizar el movimiento de la cabeza, ordenando logicamente los requerimientos pendientes al disco, considerando el numeero de cilindro en cada requerimiento.\\
+La atencion de requerimientos a pistas duplicadas se resuelven segun el algoritmo de planificacion:
+\begin{itemize}
+    \item \textbf{FCFS}: First Come First Served, se atienden de manera separada (tantas veces como se requieran).
+    \item \textbf{SSTF}: Shortest Seek Time First, selecciona el requerimiento que requiere el menor movimiento del cabezal.
+    \item \textbf{SCAN}: Barre el disco en una direccion atendiendo los requerimientos pendientes en esa ruta hasta llegar a la ultima pista del disco y cambia la direccion. Cuando llega al final del disco, comienza a barrer en sentido contrario.
+    \item \textbf{LOOK}: Similar al SCAN, pero no llega hasta la ultima pista del disco, sino que llega hasta el ultimo requerimiento de direccion actual.
+    \item \textbf{C-SCAN}: Circular SCAN, similar al SCAN, pero restringe la atencion en un solo sentido. Al llegar a la ultima pista del disco en el sentido actual, vuelve a la pista del otro extremo (salto) y sigue barriendo en el mismo sentido.
+    \item \textbf{C-LOOK}: Circular LOOK, se comporta de manera dimilar al LOOK, pero restringe la atencion en un solo sentido, al llegar a la ultima pista de los requerimientos en el sentido actual vuelve a la primer pista mas lejana del otro extremo y sigue barriendo en el mismo sentido.
+\end{itemize}
+\subsubsection{Atencion de Page Faults}
+Los fallos de pagina poseen mayor prioridad que los requerimientos convencionales, por lo tanto deben ser atendidos inmediatamende despues del requerimiento que se esta atendiendo actualmente.
+Una vez que no existan mas requerimientos por page faults en la cola, se procede:
+\begin{itemize}
+    \item \textbf{FCFS}: en orden FCFS.
+    \item \textbf{SSTF}: en orden SSTF.
+    \item \textbf{SCAN/LOOK}: con el sentido que determina la atencion de los ultimos dos requerimientos (puede cambiar de sentido).
+    \item \textbf{C-SCAN/C-LOOK}: con el sentido original, el sentido no cambia.
+\end{itemize}
+
+
+\section{Inodos}
+Los inodos son estructuras auxiliares que permiten en sistemas UNIX, referenciar a los archivos y acceder a ellos.
+\begin{itemize}
+    \item Poseen informacion de bajo nivel de los archivos.
+    \item Se identifican con un numero.
+    \item Contienen metadata del archivo y punteros a los bloques de datos en el disco que conforman el archivo.
+\end{itemize}
+
+\subsection{Estuctura de un Inodo}
+\begin{itemize}
+    \item Metainformacion.
+    \item 4 direcciones a los bloques dados:
+        \begin{itemize}
+            \item 2 de direccionamiento directo (DD).
+            \item 1 de direccionamiento indirecto simple (DIS).
+            \item 1 de direccionamiento indirecto doble (DID).
+        \end{itemize}
+\end{itemize}
+\end{document}
