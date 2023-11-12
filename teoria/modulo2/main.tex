@@ -3,7 +3,7 @@
 \usepackage{enumerate}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{geometry}
+\usepackage[margin=1.2in,footskip=0.25in]{geometry}
 \usepackage{graphicx}
 \usepackage{amsfonts}
 \usepackage{array}
@@ -80,6 +80,7 @@ Algunos conceptos importantes son:
 \end{itemize}
 
 \subsection{Asignacion de Espacio}
+
 \subsubsection{Pre-Asignacion}
 \begin{itemize}
     \item Se necesita saver cuanto espaci va a ocupar el archivo en el momento de su creacion.
@@ -107,7 +108,7 @@ Posee distintos problemas, como por ejemplo el encontrar bloques libres continuo
         \includegraphics[width=0.85\textwidth]{assets/AsignacionContinua.pdf}
     \end{center}
     \caption{Asignacion Continua}
-    \label{fig:1}
+    \label{fig:3}
 \end{figure}
 
 \subsubsection{Asignacion Encadenada}
@@ -121,13 +122,15 @@ Posee distintos problemas, como por ejemplo el encontrar bloques libres continuo
     \item Se pueden consolidar los bloques de un mismo archivo para garantizar cercania de los bloques de un mismo archivo.
 \end{itemize}
 
+
 \begin{figure}[h]
     \begin{center}
-        \includegraphics[width=0.85\textwidth]{assets/AsignacionEncadenada.pdf}
+        \includegraphics[width=0.80\textwidth]{assets/AsignacionEncadenada.pdf}
     \end{center}
     \caption{Asignacion Encadenada}
-    \label{fig:2}
+    \label{fig:4}
 \end{figure}
+
 
 \subsubsection{Asignacion Indexada}
 \begin{itemize}
@@ -137,6 +140,77 @@ Posee distintos problemas, como por ejemplo el encontrar bloques libres continuo
     \item No produce fragmentacion externa.
     \item El acceso random a un archivo es eficiente.
     \item La FAT posee una unica entrada, con la direccion del bloque de indices (i-node).
+\end{itemize}
+
+\pagebreak
+
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=0.75\textwidth]{assets/AsignacionIndexada.pdf}
+    \end{center}
+    \caption{Asignacion Indexada}
+    \label{fig:5}
+\end{figure}
+
+\subsubsection{Asignacion Indexada - Variante por asignacion de secciones}
+\begin{itemize}
+    \item A cada entrada de bloque indice se agrega el campo longitud.
+    \item El indice apunta al primer bloque de un conjunto almacenado de manera contigua.
+\end{itemize}
+
+
+\vspace{-8em}
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[width=0.75\textwidth]{assets/IndexadaSecciones.pdf}
+    \end{center}
+    \caption{Asignacion Indexada - Variante por asignacion de secciones}
+    \label{fig:6}
+\end{figure}
+
+\pagebreak
+
+\subsubsection{Asignacion Indexada - Variante por niveles de indireccion}
+\begin{itemize}
+    \item Existen bloques directos de datos.
+    \item Otros bloques son considerados como bloque indices (apuntan a varios bloques de datos).
+    \item Puede haber varios niveles de indireccion.
+\end{itemize}
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[width=0.70\textwidth]{assets/NivelesIndireccion.pdf}
+    \end{center}
+\end{figure}
+
+\pagebreak
+
+\subsection{Gestion de Espacio Libre}
+Se necesita un control sobre cuales de los bloques de disco estan disponibles.
+
+\subsubsection{Tabla de Bits}
+\begin{itemize}
+    \item Tabla (vector) con 1 bit por cada bloque de disco.
+    \item Cada entrada: 0 = bloque libre, 1 = bloque ocupado.
+    \item Es facil encontrar un bloque o grupo de bloques libres.
+    \item El tamaño de la tabla es proporcional al tamaño del disco.
+\end{itemize}
+
+\subsubsection{Bloques Encadenados}
+\begin{itemize}
+    \item Se tiene un puntero al primer bloque libre.
+    \item Cada bloque libre tiene un puntero al siguiente bloque libre.
+    \item Ineficiente para la busqueda de bloques libres, ya que hay que realizar varias operaciones de I/O para obtener un grupo libre.
+    \item Se producen problemas si se pierde un enlace.
+\end{itemize}
+
+\subsubsection{Indexacion o Agrupamiento}
+\begin{itemize}
+    \item Es una variante de los bloques libres encadenados.
+    \item El primer bloque libre contiene las direcciones de N bloques libres.
+    \item Las N-1 primeras direcciones son bloques libres.
+    \item La N-esima direccion referencia otro bloque con N direcciones de bloques libres.
 \end{itemize}
 
 \end{document}
